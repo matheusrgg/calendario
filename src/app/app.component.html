@@ -1,0 +1,42 @@
+<div >
+ 
+  <h1>Calendário Angular</h1>
+
+</div>
+
+<body>
+    
+  <div id="container">
+    <div id="header">
+      <div id="monthDisplay"></div>
+      <div>
+        <button id="backButton">Back</button>
+        <button id="nextButton">Next</button>
+      </div>
+    </div>
+
+    <div id="weekdays">
+      <div>Sunday</div>
+      <div>Monday</div>
+      <div>Tuesday</div>
+      <div>Wednesday</div>
+      <div>Thursday</div>
+      <div>Friday</div>
+      <div>Saturday</div>
+    </div>
+
+    <div id="calendar" >
+      <div *ngFor="let day of daysArr" class="day">
+
+        {{day.value === 'padding' ? '' : day.value}}
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <script src="./script.js"></script>
+</body>
+
+<router-outlet></router-outlet>
