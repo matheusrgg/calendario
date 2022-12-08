@@ -5,6 +5,8 @@ import {  routing } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { CalendarioComponent } from './pages/calendario/calendario.component';
+import { HomeComponent } from './pages/home/home.component';
+import { ModalReservarHoraComponent } from './pages/calendario/components/modal-reservar-hora/modal-reservar-hora.component';
 
 
 @NgModule({
@@ -12,6 +14,8 @@ import { CalendarioComponent } from './pages/calendario/calendario.component';
     AppComponent,
     LoginComponent,
     CalendarioComponent,
+    HomeComponent,
+    ModalReservarHoraComponent,
  
   ],
   imports: [
