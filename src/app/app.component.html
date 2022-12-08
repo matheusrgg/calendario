@@ -26,7 +26,7 @@
     </div>
 
     <div id="calendar" >
-      <div *ngFor="let day of daysArr" class="day" (click)="onClickModal()">
+      <div *ngFor="let day of daysArr" class="day" (click)="openModal()">
 
         {{day.value === 'padding' ? '' : day.value}}
       </div>
@@ -42,9 +42,12 @@
     
         <input id="eventTitleInput" placeholder="Event Title" />
     
-        <button id="saveButton">Save</button>
-        <button id="cancelButton">Cancel</button>
+        <button id="saveButton" (click)="closeModal()">Save</button>
+        <button id="cancelButton" (click)="closeModal()">Cancel</button>
       </div>
+    <button *ngFor="let hour of hourdays" (click)="reserveHour()">
+        {{hour}}
+    </button>
 
     </div>
   </ng-container>

@@ -1,10 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CalendarioComponent } from './pages/calendario/calendario.component';
 
-const routes: Routes = [];
+import { ModuleWithProviders } from "@angular/core";
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
+
+const APP_ROUTES : Routes = [
+  { path: 'salas-disponiveis', component : CalendarioComponent},
+];
+
+// @NgModule({
+//   imports: [RouterModule.forRoot(routes)],
+//   exports: [RouterModule]
+// })
+// export class AppRoutingModule { }
+
+
+export const routing: ModuleWithProviders<any>= RouterModule.forRoot(APP_ROUTES);

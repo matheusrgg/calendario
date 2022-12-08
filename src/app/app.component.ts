@@ -9,14 +9,22 @@ export class AppComponent implements OnInit {
   //https://www.youtube.com/watch?v=m9OSBJaQTlM&list=LL&index=1
   //https://www.youtube.com/watch?v=Q5Xen_Y7lUk
   //https://github.com/portexe?tab=repositories
-  title = 'projectBookingTenis';
   
   
   weekdays: Array<string> = ['domingo', 'segunda-feira','terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sabádo'];
+  
   daysFullCalendar: number = 0
-  //daySquare =  `<div>Teste</div>`
   daysArr :Array<any>= [];
   showModal :boolean = false
+
+  hourdays: Array<string> = [
+    '06:00 - 07:00', 
+    '07:00 - 08:00',
+    '08:00 - 09:00',
+    '18:00 - 19:00',
+    '19:00 - 20:00',
+    '20:00 - 21:00',
+  ]
 
   constructor() {
   }
@@ -75,9 +83,17 @@ export class AppComponent implements OnInit {
     
   }
 
-  onClickModal(){
+  openModal(){
     console.log("modal aberto");
     this.showModal = true;
+  }
+
+  closeModal(){
+    this.showModal = false;
+  }
+
+  reserveHour(){
+    console.log("hora reservada");
   }
 }
 
