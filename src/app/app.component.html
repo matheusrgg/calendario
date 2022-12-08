@@ -26,12 +26,29 @@
     </div>
 
     <div id="calendar" >
-      <div *ngFor="let day of daysArr" class="day">
+      <div *ngFor="let day of daysArr" class="day" (click)="onClickModal()">
 
         {{day.value === 'padding' ? '' : day.value}}
       </div>
     </div>
   </div>
+
+
+
+  <ng-container *ngIf="showModal">
+    <div class="modal">
+      <div id="newEventModal">
+        <h2>New Event</h2>
+    
+        <input id="eventTitleInput" placeholder="Event Title" />
+    
+        <button id="saveButton">Save</button>
+        <button id="cancelButton">Cancel</button>
+      </div>
+
+    </div>
+  </ng-container>
+
 
 
 

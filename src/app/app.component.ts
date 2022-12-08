@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   daysFullCalendar: number = 0
   //daySquare =  `<div>Teste</div>`
   daysArr :Array<any>= [];
-
+  showModal :boolean = false
 
   constructor() {
   }
@@ -73,6 +73,11 @@ export class AppComponent implements OnInit {
       }
     }
     
+  }
+
+  onClickModal(){
+    console.log("modal aberto");
+    this.showModal = true;
   }
 }
 
