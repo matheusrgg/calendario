@@ -11,7 +11,7 @@ import { LoginComponent } from './pages/login/login.component';
 const APP_ROUTES : Routes = [
   { path: '', component : HomeComponent},
   { path: 'calendario', component : CalendarioComponent},
-  { path: 'calendario/:id?', component : CalendarioComponent},
+  { path: 'calendario/:id', component : CalendarioComponent},
   { path: 'login', component : LoginComponent},
 ];
 

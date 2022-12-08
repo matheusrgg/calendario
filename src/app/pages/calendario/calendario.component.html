@@ -30,7 +30,7 @@
         <div *ngFor="let day of daysArr" class="day" >
   
           {{day.value === 'padding' ? '' : day.value}}
-          <button  
+          <button  *ngIf="day.value  != 'padding'"
           [routerLink]="['/calendario', day.date]" 
           (click)=" openModal()"
           >Reservar</button>
