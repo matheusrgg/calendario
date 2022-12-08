@@ -12,6 +12,8 @@ export class CalendarioComponent {
   daysArr :Array<any>= [];
   showModal :boolean = false
 
+  diaClicado :string = 'Dia 5'
+
 
   constructor() {
   }

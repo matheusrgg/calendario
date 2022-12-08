@@ -1,4 +1,5 @@
-import { Component, EventEmitter , Output} from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-modal-reservar-hora',
@@ -7,11 +8,11 @@ import { Component, EventEmitter , Output} from '@angular/core';
 })
 export class ModalReservarHoraComponent {
 
-
   @Output() mandarFecharModal = new EventEmitter();
+  diaReserva: string = ''
 
   hourdays: Array<string> = [
-    '06:00 - 07:00', 
+    '06:00 - 07:00',
     '07:00 - 08:00',
     '08:00 - 09:00',
     '18:00 - 19:00',
@@ -19,11 +20,25 @@ export class ModalReservarHoraComponent {
     '20:00 - 21:00',
   ]
 
-  reserveHour(){
-    console.log("hora reservada");
+  constructor(
+
+    private route: ActivatedRoute
+  ) {
+
   }
 
-  closeModal(){
+  ngOnInit(): void {
+    this.route.url.forEach(element => {
+      this.diaReserva = element[1].path
+    });
+  }
+
+  reserveHour() {
+
+    console.log("hora reservada", this.diaReserva);
+  }
+
+  closeModal() {
     console.log("fecharModals");
 
     this.mandarFecharModal.emit(false)

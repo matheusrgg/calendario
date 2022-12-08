@@ -27,9 +27,13 @@
       </div>
   
       <div id="calendar" >
-        <div *ngFor="let day of daysArr" class="day" (click)="openModal()">
+        <div *ngFor="let day of daysArr" class="day" >
   
           {{day.value === 'padding' ? '' : day.value}}
+          <button  
+          [routerLink]="['/calendario', day.date]" 
+          (click)=" openModal()"
+          >Reservar</button>
         </div>
       </div>
     </div>
@@ -37,20 +41,11 @@
   
   
     <ng-container *ngIf="showModal">
-      <div class="modal">
-        <div id="newEventModal">
-          <h2>New Event</h2>
+      <app-modal-reservar-hora 
       
-          <input id="eventTitleInput" placeholder="Event Title" />
-      
-          <button id="saveButton" (click)="closeModal()">Save</button>
-          <button id="cancelButton" (click)="closeModal()">Cancel</button>
-        </div>
-
-  
-      </div>
-
-      <app-modal-reservar-hora (mandarFecharModal)="onFecharModal($event)"></app-modal-reservar-hora>
+ 
+      (mandarFecharModal)="onFecharModal($event)"
+      ></app-modal-reservar-hora>
     </ng-container>
   
   

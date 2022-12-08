@@ -1,4 +1,5 @@
 <p>modal-reservar-hora works!</p>
+<h1>{{diaReserva}}</h1>
 <button id="cancelButton" (click)="closeModal()">Cancel</button>
 <button *ngFor="let hour of hourdays" (click)="reserveHour()">
     {{hour}}
