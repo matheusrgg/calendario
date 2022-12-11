@@ -15,15 +15,15 @@
             <div class="form-outline mb-4">
                 <label class="form-label" for="typeEmailX-2">Endereço de e-mail</label>
               <input
+              [(ngModel)]="usuario.nome" 
               id="usuario"
               type="email" id="typeEmailX-2" class="form-control form-control-lg" />
             </div>
-            <!-- [(ngModel)]="usuario.nome" -->
-
-            <!-- [(ngModel)]="usuario.senha" -->
+           
             <div class="form-outline mb-4">
                 <label class="form-label" for="typePasswordX-2">Senha</label>
               <input
+              [(ngModel)]="usuario.senha"
               id="senha"
               type="password" id="typePasswordX-2" class="form-control form-control-lg" />
             </div>
@@ -31,7 +31,7 @@
             
             <button 
             class="btn btn-primary " 
-            style="background-color: #6f42c1; width: -webkit-fill-available;" type="submit"
+            style="background-color: #2e71b4; width: -webkit-fill-available;" type="submit"
             (click)="fazerLogin()"
           
             

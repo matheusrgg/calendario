@@ -18,7 +18,7 @@ export class AuthService {
     usuario.senha === '123456') {
    
       this.usuarioAutenticado=true;
-      this.router.navigate(["/salas-disponiveis"])
+      this.router.navigate(["/calendario"])
     }else{
       this.usuarioAutenticado =false;
     }
