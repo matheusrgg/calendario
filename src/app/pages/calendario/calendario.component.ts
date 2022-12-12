@@ -6,50 +6,71 @@ import { Component } from '@angular/core';
   styleUrls: ['./calendario.component.css']
 })
 export class CalendarioComponent {
-  weekdays: Array<string> = ['domingo', 'segunda-feira','terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sabádo'];
-  
-  daysFullCalendar: number = 0
-  daysArr :Array<any>= [];
-  showModal :boolean = false
+  weekdays: Array<string> = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sabádo'];
 
-  diaClicado :string = 'Dia 5'
+  daysArr: Array<any> = [];
+  showModal: boolean = false
+  dataAtual = Date.now()
+  dateDisplay :string = ''
+
+  nav = 0
 
 
-  constructor() {
-  }
+constructor(){
 
+}
+  newMonth = new Date();
+ 
 
   ngOnInit() {
+    this.configDatas()
+  }
 
-    const dt = new Date()
+  backMonth() {
+    console.log("funciona pra tras", this.nav);
+    this.nav--
+    this.daysArr= []
+    this.configDatas()
+   
 
+  }
+  nextMonth() {
+    console.log("funciona pra tras", this.nav);
+    this.nav++
+    this.daysArr= []
+    this.configDatas()
+  }
+
+  configDatas(){
+    const dt = new Date();
+
+    if (this.nav !== 0) {
+      dt.setMonth(new Date().getMonth() + this.nav);
+    }
 
     const day = dt.getDate();
     const month = dt.getMonth();
     const year = dt.getFullYear();
 
-
     const firstDayOfMonth = new Date(year, month, 1);
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-
     const dateString = firstDayOfMonth.toLocaleDateString('pt-br', {
       weekday: 'long',
       year: 'numeric',
       month: 'numeric',
       day: 'numeric',
     });
+  
+    this.dateDisplay = `${dt.toLocaleDateString('pt-br', { month: 'long' })} ${year}`;
+    const  paddingDays = this.weekdays.indexOf(dateString.split(', ')[0])
+    //cont daysFullCalendar = paddingDays + daysInMonth
+    this.preencherCalendario(paddingDays, daysInMonth , month, year)
+  }
 
+
+  preencherCalendario(paddingDays:any, daysInMonth:any , month:any, year:any){
+    console.log(paddingDays,daysInMonth, month, year);
  
-
-    const paddingDays = this.weekdays.indexOf(dateString.split(', ')[0])
- 
-
-
-    this.daysFullCalendar = paddingDays + daysInMonth
-    console.log("daysFullCalendar", this.daysFullCalendar);
-
-   
-    
     for (let i = 1; i <= paddingDays + daysInMonth; i++) {
       const dayString = `${month + 1}/${i - paddingDays}/${year}`;
 
@@ -69,22 +90,16 @@ export class CalendarioComponent {
         });
       }
     }
-    
   }
 
-  openModal(){
+  
+  openModal() {
     console.log("modal aberto");
     this.showModal = true;
   }
 
-  closeModal(){
-    this.showModal = false;
+  onFecharModal(evento: any) {
+    console.log("falseeeeeeeeeeeee", evento);
+    this.showModal = evento;
   }
-
-  onFecharModal(evento:any){
-      console.log("falseeeeeeeeeeeee", evento);
-      this.showModal = evento;
-  }
-
-
 }

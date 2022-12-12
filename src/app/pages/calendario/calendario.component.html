@@ -9,10 +9,11 @@
       
     <div id="container">
       <div id="header">
-        <div id="monthDisplay"></div>
+        <div>{{ dataAtual | date}}</div>
+        <div>{{ dateDisplay}}</div>
         <div>
-          <button id="backButton">Back</button>
-          <button id="nextButton">Next</button>
+          <button id="backButton" (click)="backMonth()">Back</button>
+          <button id="nextButton" (click)="nextMonth()">Next</button>
         </div>
       </div>
   
