@@ -1,38 +1,38 @@
-<p>calendario works!</p>
-<div >
- 
-    <h1>Calendário Angular</h1>
-  
-  </div>
-  
   <body>
       
     <div id="container">
       <div id="header">
-        <div>{{ dateDisplay | titlecase}}</div>
+        <h1>{{ dateDisplay | titlecase}}</h1>
         <div>
-          <button id="backButton" (click)="backMonth()">Back</button>
-          <button id="nextButton" (click)="nextMonth()">Next</button>
+          <button  class="btn btn-lg btn-secondary fw-bold border-white " (click)="backMonth()">Voltar</button>
+          <button 
+          
+          class="btn btn-lg btn-secondary fw-bold border-white "
+          (click)="nextMonth()">Próximo</button>
         </div>
       </div>
   
       <div id="weekdays">
-        <div>Sunday</div>
-        <div>Monday</div>
-        <div>Tuesday</div>
-        <div>Wednesday</div>
-        <div>Thursday</div>
-        <div>Friday</div>
-        <div>Saturday</div>
+        <h5>Sunday</h5>
+        <h5>Monday</h5>
+        <h5>Tuesday</h5>
+        <h5>Wednesday</h5>
+        <h5>Thursday</h5>
+        <h5>Friday</h5>
+        <h5>Saturday</h5>
       </div>
   
       <div id="calendar" >
         <div *ngFor="let day of daysArr" class="day" >
   
           {{day.value === 'padding' ? '' : day.value}}
-          <button  *ngIf="day.value  != 'padding'"
+          <button  
+
+          *ngIf="day.value  != 'padding'"
           [routerLink]="['/calendario', day.date]" 
           (click)=" openModal()"
+             id="reserva"
+          class="btn btn-sm btn-secondary fw-bold border-white "
           >Reservar</button>
         </div>
       </div>

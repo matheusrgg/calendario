@@ -1,18 +1,12 @@
 
 <div id="newEventModal">
 
+    <h2>Reserva para o dia: {{diaReserva  | date: 'dd/MM/yyyy'}}</h2>
 
 
-    <p>modal-reservar-hora works!</p>
-    <h1>{{diaReserva  | date: 'dd/MM/yyyy'}}</h1>
 
-
-  
-        <div class="col-md-10">
-            <div class="box box-primary">
-              <div class="box-body">
                 <form [formGroup]="form"  >
-                  <h3>Horários</h3>
+                  <h5>Horários</h5>
                   <div>
                     <div class="form-check">
                       <input type="radio" class="form-check-input" name="food" id="option1" value="06:00 - 07:00" formControlName="food">
@@ -32,17 +26,23 @@
                     </div>
                   </div>
                 </form>
-              </div>
-            </div>
-          </div>
+         
 
               <div style="display: flex;
     justify-content: space-evenly;
     margin-top: 40px;
     "
     >
-        <button  (click)="closeModal()">Cancelar</button>
-        <button  (click)="saveTime()">Reservar</button>
+        <button  
+        (click)="closeModal()"
+        id="reserva"
+        class="btn btn-sm btn-secondary fw-bold border-white "
+        
+        >Cancelar</button>
+        <button  (click)="saveTime()"
+        id="reserva"
+        class="btn btn-sm btn-secondary fw-bold border-white "
+        >Reservar</button>
     </div>
     
       

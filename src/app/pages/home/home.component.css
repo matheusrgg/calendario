@@ -105,3 +105,7 @@ text-shadow: none; /* Prevent inheritance from `body` */
 }
 
 
+#reservar{
+  background: #cac43b;
+}
+
