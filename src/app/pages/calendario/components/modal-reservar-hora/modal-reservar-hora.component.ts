@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 @Component({
   selector: 'app-modal-reservar-hora',
   templateUrl: './modal-reservar-hora.component.html',
@@ -11,21 +11,19 @@ export class ModalReservarHoraComponent {
   @Output() mandarFecharModal = new EventEmitter();
   diaReserva: string = ''
 
-  hourdays: Array<string> = [
-    '06:00 - 07:00',
-    '07:00 - 08:00',
-    '08:00 - 09:00',
-    '18:00 - 19:00',
-    '19:00 - 20:00',
-    '20:00 - 21:00',
-  ]
+  // form = FormGroup();
 
   constructor(
 
     private route: ActivatedRoute
   ) {
-
   }
+
+  form = new FormGroup({
+    food: new FormControl("", {
+      validators: [Validators.required],
+    }),
+  });
 
   ngOnInit(): void {
     this.route.url.forEach(element => {
@@ -42,5 +40,9 @@ export class ModalReservarHoraComponent {
     console.log("fecharModals");
 
     this.mandarFecharModal.emit(false)
+  }
+
+  saveTime(){
+    console.log("salvar horário", this.form.value);
   }
 }

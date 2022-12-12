@@ -4,11 +4,54 @@
 
 
     <p>modal-reservar-hora works!</p>
-    <h1>{{diaReserva}}</h1>
-    <button id="cancelButton" (click)="closeModal()">Cancel</button>
-    <button *ngFor="let hour of hourdays" (click)="reserveHour()">
-        {{hour}}
-    </button>
+    <h1>{{diaReserva  | date: 'dd/MM/yyyy'}}</h1>
+
+
+  
+        <div class="col-md-10">
+            <div class="box box-primary">
+              <div class="box-body">
+                <form [formGroup]="form"  >
+                  <h3>Horários</h3>
+                  <div>
+                    <div class="form-check">
+                      <input type="radio" class="form-check-input" name="food" id="option1" value="06:00 - 07:00" formControlName="food">
+                      <label class="form-check-label" for="option1">06:00 - 07:00</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="radio" class="form-check-input" name="food" id="option2" value="07:00 - 08:00" formControlName="food">
+                      <label class="form-check-label" for="option2">07:00 - 08:00</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="radio" name="food" id="option3" class="form-check-input" value="08:00 - 09:00" formControlName="food">
+                      <label class="form-check-label" for="option3">08:00 - 09:00</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="radio" name="food" id="option4" class="form-check-input" value="18:00 - 19:00" formControlName="food">
+                      <label class="form-check-label" for="option4">18:00 - 19:00</label>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+              <div style="display: flex;
+    justify-content: space-evenly;
+    margin-top: 40px;
+    "
+    >
+        <button  (click)="closeModal()">Cancelar</button>
+        <button  (click)="saveTime()">Reservar</button>
+    </div>
+    
+      
+
+
 
 </div>
+
+
+
+
 <div id="modalBackDrop"></div>

@@ -9,8 +9,7 @@
       
     <div id="container">
       <div id="header">
-        <div>{{ dataAtual | date}}</div>
-        <div>{{ dateDisplay}}</div>
+        <div>{{ dateDisplay | titlecase}}</div>
         <div>
           <button id="backButton" (click)="backMonth()">Back</button>
           <button id="nextButton" (click)="nextMonth()">Next</button>

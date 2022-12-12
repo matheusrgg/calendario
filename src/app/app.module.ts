@@ -9,7 +9,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ModalReservarHoraComponent } from './pages/calendario/components/modal-reservar-hora/modal-reservar-hora.component';
 import { HeaderComponent } from './pages/calendario/components/header/header.component';
 import { AuthService } from './pages/login/auth.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -27,6 +27,7 @@ import { FormsModule } from '@angular/forms';
     // AppRoutingModule
     FormsModule,
     routing
+    ,ReactiveFormsModule
   ],
   providers: [
     AuthService
