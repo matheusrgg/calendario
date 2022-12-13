@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ReservasService } from 'src/app/services/reservas.service';
 
 @Component({
   selector: 'app-calendario',
@@ -16,7 +17,9 @@ export class CalendarioComponent {
   nav = 0
 
 
-constructor(){
+constructor(
+  private reservasService : ReservasService
+){
 
 }
   newMonth = new Date();
@@ -35,6 +38,13 @@ constructor(){
 
   }
   nextMonth() {
+    console.log("testando o service de reservas", this.reservasService.getReservas().subscribe((data:any)=>{
+      console.log(data);
+    }));
+
+
+
+
     console.log("funciona pra tras", this.nav);
     this.nav++
     this.daysArr= []
