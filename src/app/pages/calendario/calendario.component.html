@@ -28,11 +28,14 @@
           {{day.value === 'padding' ? '' : day.value}}
           <button  
 
+          [disabled]="day.value < getDay"
           *ngIf="day.value  != 'padding'"
           [routerLink]="['/calendario', day.date]" 
           (click)=" openModal()"
              id="reserva"
-          class="btn btn-sm btn-secondary fw-bold border-white "
+
+
+          class="btn btn-sm btn-secondary fw-bold border-white " 
           >Reservar</button>
         </div>
       </div>

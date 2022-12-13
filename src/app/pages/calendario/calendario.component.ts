@@ -11,7 +11,8 @@ export class CalendarioComponent {
 
   daysArr: Array<any> = [];
   showModal: boolean = false
-  dataAtual = Date.now()
+  dataHoje:Date = new Date()
+  getDay  = this.dataHoje.getDate()
   dateDisplay :string = ''
 
   nav = 0
@@ -26,6 +27,7 @@ constructor(
  
 
   ngOnInit() {
+    console.log("getday",this.getDay);
     this.configDatas()
   }
 
@@ -62,6 +64,7 @@ constructor(
     const month = dt.getMonth();
     const year = dt.getFullYear();
 
+
     const firstDayOfMonth = new Date(year, month, 1);
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const dateString = firstDayOfMonth.toLocaleDateString('pt-br', {
@@ -70,7 +73,7 @@ constructor(
       month: 'numeric',
       day: 'numeric',
     });
-  
+  console.log("object", dateString);
     this.dateDisplay = `${dt.toLocaleDateString('pt-br', { month: 'long' })} ${year}`;
     const  paddingDays = this.weekdays.indexOf(dateString.split(', ')[0])
     //cont daysFullCalendar = paddingDays + daysInMonth
@@ -82,14 +85,16 @@ constructor(
     console.log(paddingDays,daysInMonth, month, year);
  
     for (let i = 1; i <= paddingDays + daysInMonth; i++) {
-      const dayString = `${month + 1}/${i - paddingDays}/${year}`;
-
+      const dayString = `${i - paddingDays}/${month + 1}/${year}`;
+      
+      console.log("oq tem dentro desse dayString?", dayString);
       if (i > paddingDays) {
         this.daysArr.push({
           value: i - paddingDays,
           event: null,
           isCurrentDay: false,
           date: dayString,
+        
         });
       } else {
         this.daysArr.push({
@@ -112,4 +117,6 @@ constructor(
     console.log("falseeeeeeeeeeeee", evento);
     this.showModal = evento;
   }
+
+  
 }
