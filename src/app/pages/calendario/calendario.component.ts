@@ -27,7 +27,6 @@ constructor(
  
 
   ngOnInit() {
-    console.log("getday",this.getDay);
     this.configDatas()
   }
 
@@ -85,15 +84,17 @@ constructor(
     console.log(paddingDays,daysInMonth, month, year);
  
     for (let i = 1; i <= paddingDays + daysInMonth; i++) {
-      const dayString = `${i - paddingDays}/${month + 1}/${year}`;
-      
-      console.log("oq tem dentro desse dayString?", dayString);
+      const dayString = `${month + 1}/${i - paddingDays}/${year}`;
+     
+      console.log("oq tem dentro desse dayString?", month+1);
       if (i > paddingDays) {
         this.daysArr.push({
           value: i - paddingDays,
           event: null,
           isCurrentDay: false,
           date: dayString,
+          month: month+1,
+          dataVelha:this.comparadorData(dayString)
         
         });
       } else {
@@ -118,5 +119,18 @@ constructor(
     this.showModal = evento;
   }
 
+
+  comparadorData(dayAmericano:string){
+
+    
+    const dataBotao = new Date(dayAmericano)
+
+    if(this.dataHoje < dataBotao){
+      return true
+    }else{
+      return false
+
+    }
+  }
   
 }
