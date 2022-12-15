@@ -39,13 +39,6 @@ constructor(
 
   }
   nextMonth() {
-    console.log("testando o service de reservas", this.reservasService.getReservas().subscribe((data:any)=>{
-      console.log(data);
-    }));
-
-
-
-
     console.log("funciona pra tras", this.nav);
     this.nav++
     this.daysArr= []
