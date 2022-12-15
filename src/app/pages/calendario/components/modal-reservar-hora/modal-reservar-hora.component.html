@@ -7,14 +7,35 @@
 
   <form [formGroup]="form">
     <h5>Horários</h5>
-    <div *ngFor="let hour of hourdays">
+
       <div >
-        <input type="radio" class="form-check-input" name="horario" id="option1" value="06:00 - 07:00"
-          formControlName="horario">
-        <label class="form-check-label" for="option1">{{hour}}</label>
+        <input type="radio" class="form-check-input" name="seisManha" id="option1" value="06:00-7:00"
+          formControlName="seisManha">
+        <label class="form-check-label" for="option1">06:00 - 07:00</label>
+      </div>
+      <div >
+        <input type="radio" class="form-check-input" name="seteManha" id="option1" value="07:00 - 08:00"
+          formControlName="seteManha">
+        <label class="form-check-label" for="option1">07:00 - 08:00</label>
+      </div>
+      <div >
+        <input type="radio" class="form-check-input" name="oitoManha" id="option1" value="08:00 - 09:00"
+          formControlName="oitoManha">
+        <label class="form-check-label" for="option1">08:00 - 09:00</label>
+      </div>
+      <div >
+        <input type="radio" class="form-check-input" name="seisNoite" id="option1" value="18:00 - 19:00"
+          formControlName="seisNoite">
+        <label class="form-check-label" for="option1">18:00 - 19:00</label>
+      </div>
+      <div >
+        <input type="radio" class="form-check-input" name="seteNoite" id="option1" value="19:00 - 20:00"
+          formControlName="seteNoite">
+        <label class="form-check-label" for="option1">19:00 - 20:00</label>
       </div>
 
-    </div>
+
+
   </form>
 
   <div style="display: flex;
