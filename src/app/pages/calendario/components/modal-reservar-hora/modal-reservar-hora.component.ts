@@ -25,7 +25,7 @@ export class ModalReservarHoraComponent {
     '20:00 - 21:00',
   ]
 
-  reservas : any[]= []
+  reservas: any[] = []
 
   constructor(
 
@@ -41,11 +41,11 @@ export class ModalReservarHoraComponent {
     // seisNoite: new FormControl({ value: '18:00 - 19:00', disabled: true }, Validators.required),
     // seteNoite: new FormControl({ value: '19:00 - 20:00', disabled: false }, Validators.required),
 
-    seisManha: new FormControl( Validators.required),
-    seteManha: new FormControl( Validators.required),
-    oitoManha: new FormControl( Validators.required),
-    seisNoite: new FormControl( Validators.required),
-    seteNoite: new FormControl( Validators.required),
+    seisManha: new FormControl(Validators.required),
+    seteManha: new FormControl(Validators.required),
+    oitoManha: new FormControl(Validators.required),
+    seisNoite: new FormControl(Validators.required),
+    seteNoite: new FormControl(Validators.required),
 
     // seisManha: new FormControl({ value: '06:00 - 07:00' , require}, Validators.required),
     // seteManha: new FormControl({ value: '07:00 - 08:00', require}, Validators.required),
@@ -59,19 +59,19 @@ export class ModalReservarHoraComponent {
 
   });
 
-  
+
 
   ngOnInit(): void {
     this.chamandoServico()
     console.log("array cheia", this.horariosReservadoHojeArr);
-    this.checaSeTemOValorIgual("06:00-7:00")
+    this.checaSeTemOValorIgual()
     this.route.url.forEach(element => {
       this.diaReserva = element[1].path
     });
 
 
-    
-    this.reservasService.getReservas().subscribe(data=>{
+
+    this.reservasService.getReservas().subscribe(data => {
       this.reservas = data
       console.log(this.reservas);
     })
@@ -112,18 +112,37 @@ export class ModalReservarHoraComponent {
     })
   }
 
-  checaSeTemOValorIgual(input : string) {
+  checaSeTemOValorIgual() {
 
     this.horariosReservadoHojeArr.filter(horario => {
-      if (horario == input) {
-        console.log(true);
-        this.form.controls['seisManha'].disable();
-      } else {
-        console.log(false);
+      const time = horario
+      switch (time) {
+        case "06:00-7:00":
+          this.form.controls['seisManha'].disable();
+          break;
+        case "07:00-08:00":
+          this.form.controls['seteManha'].disable();
+          break;
+        case "08:00-09:00":
+          this.form.controls['oitoManha'].disable();
+          break;
+        case "18:00-19:00":
+          this.form.controls['seisNoite'].disable();
+          break;
+        case "19:00-20:00":
+          this.form.controls['seteNoite'].disable();
+
 
       }
+      // if (horario == input) {
+      //   console.log(true);
+      //   this.form.controls['seisManha'].disable();
+      // } else {
+      //   console.log(false);
 
-      console.log(horario);
+      // }
+
+      // console.log(horario);
     })
 
     // group.controls.forEach((data)=>{

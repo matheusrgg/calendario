@@ -30,7 +30,7 @@ import { of } from "rxjs";
             "quadra": "rápida",
             "nome": "Caio de Sousa",
             "Dia" : "22/12/2022",
-            "Hora":"19:00-21:00",
+            "Hora":"19:00-20:00",
             "pagamento": "nao concluido",
             "status": "reservado"
         },
