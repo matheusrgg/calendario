@@ -1,4 +1,5 @@
 <body>
+
   <div id="container">
     <div id="header">
       <h1>{{ dateDisplay | titlecase}}</h1>
@@ -8,25 +9,59 @@
       </div>
     </div>
 
-    <div id="weekdays">
-      <h5>Sunday</h5>
-      <h5>Monday</h5>
-      <h5>Tuesday</h5>
-      <h5>Wednesday</h5>
-      <h5>Thursday</h5>
-      <h5>Friday</h5>
-      <h5>Saturday</h5>
-    </div>
-    <div id="calendar">
-      <div *ngFor="let day of daysArr" class="day">
-        {{day.value === 'padding' ? '' : day.value}}
-        <button [disabled]="!day.dataVelha" *ngIf="day.value  != 'padding'" [routerLink]="['/calendario', day.date]"
-          (click)=" openModal()" id="reserva" class="btn btn-sm btn-secondary fw-bold border-white ">Reservar</button>
+
+  
+      <div id="calendar-content" class="calendar-cells">
+
+        <div id="table-header">
+          <div class="row">
+            <div class="col">Dom</div>
+            <div class="col">Seg</div>
+            <div class="col">Ter</div>
+            <div class="col">Qua</div>
+            <div class="col">Qui</div>
+            <div class="col">Sex</div>
+            <div class="col">Sab</div>
+          </div>
+        </div>
+
+        <div id="calendar-table" class="animated fadeInRight" [innerHTML]="tableRow ">
+          <!-- <div [innerHTML]="tableRow "></div> -->
+          {{tableRow}}
+     
+        </div>
+
       </div>
-    </div>
+
+
+    <div id="calendar" >
+        <div *ngFor="let day of daysArr" class="day" >
+  
+          {{day.value === 'padding' ? '' : day.value}}
+          <button  
+
+          [disabled]="day.value < getDay"
+          *ngIf="day.value  != 'padding'"
+          [routerLink]="['/calendario', day.date]" 
+          (click)=" openModal()"
+             id="reserva"
+
+
+          class="btn btn-sm btn-secondary fw-bold border-white " 
+          >Reservar</button>
+        </div>
+      </div>
   </div>
+
+
+
   <ng-container *ngIf="showModal">
     <app-modal-reservar-hora (mandarFecharModal)="onFecharModal($event)"></app-modal-reservar-hora>
   </ng-container>
+
+
+
+
+
   <script src="./script.js"></script>
 </body>

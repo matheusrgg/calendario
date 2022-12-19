@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { ReservasService } from 'src/app/services/reservas.service';
 
 @Component({
@@ -17,9 +17,18 @@ export class CalendarioComponent {
 
   nav = 0
 
+  emptyArrSemanaSemData:any = []
+  diaDaSemana = 20
+  colEmptyDiaSemana = ''
+  // `<div class="col">Vázio</div> <div class="col">Vázio</div>` + `<div class="col">Vázio</div>`
+  colDiaSemana = ""
+  colRow = `<div class="row">${this.colEmptyDiaSemana || this.colDiaSemana}</div>`
+  tableRow = ''
+
 
 constructor(
-  private reservasService : ReservasService
+  private reservasService : ReservasService,
+  private renderer2:Renderer2
 ){
 
 }
@@ -28,6 +37,10 @@ constructor(
 
   ngOnInit() {
     this.configDatas()
+    // this.colEmptyDiaSemana += `<div class="col">Vázio</div>`
+    
+  
+
   }
 
   backMonth() {
@@ -36,7 +49,7 @@ constructor(
     this.daysArr= []
     this.configDatas()
    
-
+   
   }
   nextMonth() {
     console.log("funciona pra tras", this.nav);
@@ -59,6 +72,8 @@ constructor(
 
     const firstDayOfMonth = new Date(year, month, 1);
     const daysInMonth = new Date(year, month + 1, 0).getDate();
+    console.log("days int the month igual a last Day neh?" ,daysInMonth );
+
     const dateString = firstDayOfMonth.toLocaleDateString('pt-br', {
       weekday: 'long',
       year: 'numeric',
@@ -68,7 +83,28 @@ constructor(
   console.log("object", dateString);
     this.dateDisplay = `${dt.toLocaleDateString('pt-br', { month: 'long' })} ${year}`;
     const  paddingDays = this.weekdays.indexOf(dateString.split(', ')[0])
+    console.log("o que tem nesse padding Days?", paddingDays);
     //cont daysFullCalendar = paddingDays + daysInMonth
+
+
+
+ 
+    //esse for loop vai da 4 dias da semana
+    for (let i = 0; i < (paddingDays || 7); i++) {
+     this.colEmptyDiaSemana += `<div class="col">Vázio</div>`
+    }
+
+    //esse for loop vai da 31 dias
+    //preciso colocar a regra de quebrar
+    //antes preciso criar uma row aqui em cima neh
+    for (let i = 0; i < daysInMonth ; i++){
+      this.colDiaSemana += `<div class="col">Dia Da Semana</div>`
+    }
+    console.log("colDiaSemana", this.colDiaSemana);
+    this.tableRow = this.colEmptyDiaSemana + this.colDiaSemana 
+    console.log("quebrou de vez", this.tableRow);
+console.log("como ta essa srting com os dias vazios", this.colEmptyDiaSemana);
+
     this.preencherCalendario(paddingDays, daysInMonth , month, year)
   }
 
