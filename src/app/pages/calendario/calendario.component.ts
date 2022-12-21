@@ -1,4 +1,4 @@
-import { Component, Renderer2 } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ReservasService } from 'src/app/services/reservas.service';
 
 @Component({
@@ -6,32 +6,35 @@ import { ReservasService } from 'src/app/services/reservas.service';
   templateUrl: './calendario.component.html',
   styleUrls: ['./calendario.component.css']
 })
-export class CalendarioComponent {
-  weekdays: Array<string> = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sabádo'];
+export class CalendarioComponent implements OnInit{
 
+  weekdays: Array<string> = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sabádo'];
+  
   daysArr: Array<any> = [];
   showModal: boolean = false
   dataHoje:Date = new Date()
   getDay  = this.dataHoje.getDate()
   dateDisplay :string = ''
-
+  
   nav = 0
-
+  
   emptyArrSemanaSemData:any = []
-  diaDaSemana = 20
+  // diaDaSemana = 20
   colEmptyDiaSemana = ''
   // `<div class="col">Vázio</div> <div class="col">Vázio</div>` + `<div class="col">Vázio</div>`
   colDiaSemana = ""
-  colRow = `<div class="row">${this.colEmptyDiaSemana || this.colDiaSemana}</div>`
-  tableRow = ''
+  diaDaSemana = ''
+  colRow = ''
+  // tableRow = ''
+  
+  
+  constructor(
+    private reservasService : ReservasService,
 
-
-constructor(
-  private reservasService : ReservasService,
-  private renderer2:Renderer2
-){
-
-}
+    ){
+      
+    }
+    
   newMonth = new Date();
  
 
@@ -39,7 +42,7 @@ constructor(
     this.configDatas()
     // this.colEmptyDiaSemana += `<div class="col">Vázio</div>`
     
-  
+
 
   }
 
@@ -59,6 +62,8 @@ constructor(
   }
 
   configDatas(){
+ 
+
     const dt = new Date();
 
     if (this.nav !== 0) {
@@ -90,24 +95,45 @@ constructor(
 
  
     //esse for loop vai da 4 dias da semana
+      // 7 dias da 196 carateres
     for (let i = 0; i < (paddingDays || 7); i++) {
      this.colEmptyDiaSemana += `<div class="col">Vázio</div>`
+     console.log("quantos caracteres tem uma string", this.colEmptyDiaSemana.length);
+     this.colRow = `<div class="row">${this.colEmptyDiaSemana}</div>`
     }
 
     //esse for loop vai da 31 dias
     //preciso colocar a regra de quebrar
     //antes preciso criar uma row aqui em cima neh
-    for (let i = 0; i < daysInMonth ; i++){
-      this.colDiaSemana += `<div class="col">Dia Da Semana</div>`
+    for (let i = 0; i <= daysInMonth ; i++){
+  
+      if( this.colEmptyDiaSemana.length >= 196){
+        
+        this.colRow += `<div class="row">${this.colEmptyDiaSemana}</div>`
+      }
+      //até dar 7
+      else{
+        
+        console.log("ta dentro dos 196",);
+        this.colEmptyDiaSemana  += `<div class="col">Dia Da Semana</div>`
+        this.colRow = `<div class="row">${this.colEmptyDiaSemana}</div>`
+       
+        // this.colEmptyDiaSemana  += `<div class="col">Dia Da Semana</div>`
+        // this.colRow = `<div class="row">${this.colEmptyDiaSemana}</div>`
+      }
     }
     console.log("colDiaSemana", this.colDiaSemana);
-    this.tableRow = this.colEmptyDiaSemana + this.colDiaSemana 
-    console.log("quebrou de vez", this.tableRow);
-console.log("como ta essa srting com os dias vazios", this.colEmptyDiaSemana);
+    // this.tableRow = this.colEmptyDiaSemana + this.colDiaSemana 
+    // this.colRow = this.colEmptyDiaSemana
+    // console.log("quebrou de vez", this.tableRow);
+    console.log("como ta essa srting com os dias vazios", this.colEmptyDiaSemana);
 
     this.preencherCalendario(paddingDays, daysInMonth , month, year)
   }
 
+    addNovaRow(value){
+      return `<div class="row">${value}</div>`
+    }  
 
   preencherCalendario(paddingDays:any, daysInMonth:any , month:any, year:any){
     console.log(paddingDays,daysInMonth, month, year);
