@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2,RendererFactory2, ViewChild } from '@angular/core';
 import { ReservasService } from 'src/app/services/reservas.service';
 
 @Component({
@@ -9,7 +9,6 @@ import { ReservasService } from 'src/app/services/reservas.service';
 export class CalendarioComponent implements OnInit{
 
   weekdays: Array<string> = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sabádo'];
-  
   daysArr: Array<any> = [];
   showModal: boolean = false
   dataHoje:Date = new Date()
@@ -26,26 +25,33 @@ export class CalendarioComponent implements OnInit{
   diaDaSemana = ''
   colRow = ''
   // tableRow = ''
+  col2 ='tESTE COLUNA 2 '
   
+  @ViewChild('hello', { static: false }) divHello: ElementRef;
   
   constructor(
     private reservasService : ReservasService,
-
+    private renderer: Renderer2,
+    private rendererFactory :RendererFactory2
     ){
-      
+      // this.renderer = this.rendererFactory.createRenderer(null, null);
     }
     
   newMonth = new Date();
  
 
   ngOnInit() {
+   
     this.configDatas()
     // this.colEmptyDiaSemana += `<div class="col">Vázio</div>`
     
-
+    
 
   }
 
+  ngAfterViewInit() {
+    this.renderer.setStyle(this.divHello.nativeElement, 'color', 'blue');
+  }
   backMonth() {
     console.log("funciona pra tras", this.nav);
     this.nav--
@@ -88,48 +94,20 @@ export class CalendarioComponent implements OnInit{
   console.log("object", dateString);
     this.dateDisplay = `${dt.toLocaleDateString('pt-br', { month: 'long' })} ${year}`;
     const  paddingDays = this.weekdays.indexOf(dateString.split(', ')[0])
-    console.log("o que tem nesse padding Days?", paddingDays);
-    //cont daysFullCalendar = paddingDays + daysInMonth
-
-
-
- 
-    //esse for loop vai da 4 dias da semana
-      // 7 dias da 196 carateres
-    for (let i = 0; i < (paddingDays || 7); i++) {
-     this.colEmptyDiaSemana += `<div class="col">Vázio</div>`
-     console.log("quantos caracteres tem uma string", this.colEmptyDiaSemana.length);
-     this.colRow = `<div class="row">${this.colEmptyDiaSemana}</div>`
-    }
-
-    //esse for loop vai da 31 dias
-    //preciso colocar a regra de quebrar
-    //antes preciso criar uma row aqui em cima neh
-    for (let i = 0; i <= daysInMonth ; i++){
-  
-      if( this.colEmptyDiaSemana.length >= 196){
-        
-        this.colRow += `<div class="row">${this.colEmptyDiaSemana}</div>`
-      }
-      //até dar 7
-      else{
-        
-        console.log("ta dentro dos 196",);
-        this.colEmptyDiaSemana  += `<div class="col">Dia Da Semana</div>`
-        this.colRow = `<div class="row">${this.colEmptyDiaSemana}</div>`
-       
-        // this.colEmptyDiaSemana  += `<div class="col">Dia Da Semana</div>`
-        // this.colRow = `<div class="row">${this.colEmptyDiaSemana}</div>`
-      }
-    }
-    console.log("colDiaSemana", this.colDiaSemana);
-    // this.tableRow = this.colEmptyDiaSemana + this.colDiaSemana 
-    // this.colRow = this.colEmptyDiaSemana
-    // console.log("quebrou de vez", this.tableRow);
-    console.log("como ta essa srting com os dias vazios", this.colEmptyDiaSemana);
-
+   
+    this.addNewRow()
     this.preencherCalendario(paddingDays, daysInMonth , month, year)
   }
+  
+  addNewRow() {
+
+    const recaptchaContainer = this.renderer.createElement('div');
+
+    this.renderer.setProperty(recaptchaContainer, 'id', 'recaptcha-container');
+    // Append the created div to the body element
+    return this.renderer.appendChild(document.body, recaptchaContainer);
+ }
+
 
     addNovaRow(value){
       return `<div class="row">${value}</div>`
