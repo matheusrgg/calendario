@@ -33,25 +33,28 @@ export class CalendarioComponent implements OnInit{
     private reservasService : ReservasService,
     private renderer: Renderer2,
     private rendererFactory :RendererFactory2
-    ){
-      // this.renderer = this.rendererFactory.createRenderer(null, null);
-    }
+    ){}
     
   newMonth = new Date();
- 
 
   ngOnInit() {
-   
     this.configDatas()
-    // this.colEmptyDiaSemana += `<div class="col">Vázio</div>`
-    
-    
-
   }
 
   ngAfterViewInit() {
     this.renderer.setStyle(this.divHello.nativeElement, 'color', 'blue');
+
+    this.renderer.setProperty(this.divHello.nativeElement,'innerHTML',"Hello Angular")
+    this.renderer.addClass(this.divHello.nativeElement, 'row')
+
+    const newTr = this.renderer.createElement('div');
+    this.renderer.addClass(newTr, 'row')
+    this.renderer.setProperty(newTr,'innerHTML',"Hello Angular")
+
+    this.renderer.appendChild(this.divHello.nativeElement, newTr);
+
   }
+  
   backMonth() {
     console.log("funciona pra tras", this.nav);
     this.nav--
@@ -94,25 +97,9 @@ export class CalendarioComponent implements OnInit{
   console.log("object", dateString);
     this.dateDisplay = `${dt.toLocaleDateString('pt-br', { month: 'long' })} ${year}`;
     const  paddingDays = this.weekdays.indexOf(dateString.split(', ')[0])
-   
-    this.addNewRow()
     this.preencherCalendario(paddingDays, daysInMonth , month, year)
   }
   
-  addNewRow() {
-
-    const recaptchaContainer = this.renderer.createElement('div');
-
-    this.renderer.setProperty(recaptchaContainer, 'id', 'recaptcha-container');
-    // Append the created div to the body element
-    return this.renderer.appendChild(document.body, recaptchaContainer);
- }
-
-
-    addNovaRow(value){
-      return `<div class="row">${value}</div>`
-    }  
-
   preencherCalendario(paddingDays:any, daysInMonth:any , month:any, year:any){
     console.log(paddingDays,daysInMonth, month, year);
  
@@ -141,7 +128,6 @@ export class CalendarioComponent implements OnInit{
     }
   }
 
-  
   openModal() {
     console.log("modal aberto");
     this.showModal = true;
@@ -151,7 +137,6 @@ export class CalendarioComponent implements OnInit{
     console.log("falseeeeeeeeeeeee", evento);
     this.showModal = evento;
   }
-
 
   comparadorData(dayAmericano:string){
 
