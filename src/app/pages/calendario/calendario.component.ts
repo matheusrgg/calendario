@@ -26,6 +26,8 @@ export class CalendarioComponent implements OnInit{
   colRow = ''
   // tableRow = ''
   col2 ='tESTE COLUNA 2 '
+
+  currentTr:void
   
   @ViewChild('hello', { static: false }) divHello: ElementRef;
   
@@ -42,27 +44,52 @@ export class CalendarioComponent implements OnInit{
   }
 
   ngAfterViewInit() {
-    this.renderer.setStyle(this.divHello.nativeElement, 'color', 'blue');
+  
 
-    this.renderer.setProperty(this.divHello.nativeElement,'innerHTML',"Hello Angular")
-    this.renderer.addClass(this.divHello.nativeElement, 'row')
-
+    this.renderer.setProperty(this.divHello.nativeElement,'innerHTML',"")
     const newTr = this.renderer.createElement('div');
     this.renderer.addClass(newTr, 'row')
-    this.renderer.setProperty(newTr,'innerHTML',"Hello Angular")
 
-    this.renderer.appendChild(this.divHello.nativeElement, newTr);
+    this.renderer.appendChild(this.divHello.nativeElement, newTr)
 
+    for (let i = 0; i < 2 ; i++) {
+      let emptyDivCol = this.renderer.createElement('div');
+      this.renderer.addClass(emptyDivCol, 'col')
+      this.renderer.appendChild(newTr, emptyDivCol )
+     }
+
+// console.log("pq nao pega o new TR length",currentTr);
+     for(let i = 1; i < 31; i++){
+
+      if( newTr.childNodes.length >= 7){
+        console.log("cai dentro do papapapaap");
+        this.renderer.appendChild(this.divHello.nativeElement, newTr)
+        this.renderer.appendChild(newTr.lastChild, this.addNewRow() )
+        // this.renderer.appendChild( newTr.parentNode)
+        //posso tentar colocar pra cria a div no childNode
+      }
+
+      let currentDay = this.renderer.createElement('div');
+      this.renderer.addClass(currentDay, 'col');
+      this.renderer.setProperty(currentDay,'innerHTML', i);
+      this.renderer.appendChild(newTr, currentDay );
+     }
   }
-  
+
+  addNewRow(){
+    let node = this.renderer.createElement('div');
+    this.renderer.addClass(node, 'row')
+    this.renderer.setProperty(node,'innerHTML',"Teste retorno")
+    return node
+  }
+ 
   backMonth() {
     console.log("funciona pra tras", this.nav);
     this.nav--
     this.daysArr= []
-    this.configDatas()
-   
-   
+    this.configDatas()   
   }
+  
   nextMonth() {
     console.log("funciona pra tras", this.nav);
     this.nav++
@@ -139,8 +166,6 @@ export class CalendarioComponent implements OnInit{
   }
 
   comparadorData(dayAmericano:string){
-
-    
     const dataBotao = new Date(dayAmericano)
 
     if(this.dataHoje < dataBotao){
