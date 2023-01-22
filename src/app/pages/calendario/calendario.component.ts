@@ -58,28 +58,31 @@ export class CalendarioComponent implements OnInit{
       this.renderer.appendChild(newTr, emptyDivCol )
      }
 
-// console.log("pq nao pega o new TR length",currentTr);
+     
+     console.log("pq nao pega o new TR length",newTr.childNodes.length);
+    //  console.log("pq nao pega o new TR length",newTr.childNodes.length);
+    //  console.log("pq nao pega o new TR length",this.divHello.nativeElement.length);
      for(let i = 1; i < 31; i++){
 
       if( newTr.childNodes.length >= 7){
-        console.log("cai dentro do papapapaap");
-        this.renderer.appendChild(this.divHello.nativeElement, newTr)
-        this.renderer.appendChild(newTr.lastChild, this.addNewRow() )
-        // this.renderer.appendChild( newTr.parentNode)
-        //posso tentar colocar pra cria a div no childNode
+        debugger
+        console.log("como que nao caiu?",);
+        this.renderer.appendChild(this.divHello.nativeElement,  this.addNewRow() )
       }
-
+      console.log("pq nao pega o new TR length", this.divHello.nativeElement.childNodes.length);
+      // console.log("pq nao pega o new TR length DENTRO",newTr.childNodes.length);
       let currentDay = this.renderer.createElement('div');
       this.renderer.addClass(currentDay, 'col');
       this.renderer.setProperty(currentDay,'innerHTML', i);
-      this.renderer.appendChild(newTr, currentDay );
+      this.renderer.appendChild( this.divHello.nativeElement.lastChild, currentDay );
+ 
      }
   }
 
   addNewRow(){
     let node = this.renderer.createElement('div');
     this.renderer.addClass(node, 'row')
-    this.renderer.setProperty(node,'innerHTML',"Teste retorno")
+    this.renderer.setProperty(node,'innerHTML',"Tem que ter 4 dessas")
     return node
   }
  
