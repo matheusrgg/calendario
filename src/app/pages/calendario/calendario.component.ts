@@ -63,9 +63,9 @@ export class CalendarioComponent implements OnInit{
     //  console.log("pq nao pega o new TR length",newTr.childNodes.length);
     //  console.log("pq nao pega o new TR length",this.divHello.nativeElement.length);
      for(let i = 1; i < 31; i++){
-
-      if( newTr.childNodes.length >= 7){
-        debugger
+      // console.log("deixaaaa eu tenta aqui", this.divHello.nativeElement.lastChild.childNodes.length);
+      if( this.divHello.nativeElement.lastChild.childNodes.length >= 7){
+        // debugger
         console.log("como que nao caiu?",);
         this.renderer.appendChild(this.divHello.nativeElement,  this.addNewRow() )
       }
