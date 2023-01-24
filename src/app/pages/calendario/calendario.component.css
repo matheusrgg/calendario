@@ -64,6 +64,96 @@ h1{
   color: #2e71b4 ;
 }
 
-#reserva{
-  background: #2e71b4 ;
-}
+
+ 
+ h3,h4,h5 {
+    font-weight: 300 !important;
+ }
+ 
+ .calendar-wrapper {
+    height: auto;
+    max-width: 730px;
+    margin: 0 auto;
+ }
+ 
+ .calendar-header {
+    background-color: rgba(18, 15, 25, 0.25);
+    height: 100%;
+    padding: 20px;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    position: relative;
+ }
+ 
+ .header-title {
+    padding-left: 15%;
+ }
+ 
+ .header-background {
+    background-image: url("https://raw.githubusercontent.com/JustMonk/codepen-resource-project/master/img/compressed-header.jpg");
+    height: 200px;
+    background-position: center right;
+    background-size: cover;
+ }
+ 
+ .calendar-content {
+    background-color: #fff;
+    padding: 20px;
+    padding-left: 15%;
+    padding-right: 15%;
+    overflow: hidden;
+ }
+ 
+
+ .day-mark {
+    width: 7px;
+    height: 7px;
+    background-color: #b39ddb;
+    border-radius: 100px;
+    position: absolute;
+    left: 47%;
+    top: 67%;
+ }
+ 
+ .content-wrapper {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-left: 300px;
+ }
+ 
+ .table-body .col:hover {
+    cursor: pointer;
+    /*border: 1px solid grey;*/
+    background-color: #E0E0E0;
+ }
+ 
+ .empty-day:hover {
+    cursor: default !important;
+    background-color: #fff !important;
+ }
+ 
+ .table-body .row .col {
+    padding: .75rem;
+ }
+ 
+ .table-body .col {
+    border: 1px solid transparent;
+ }
+ 
+ .table-body {}
+ 
+ .table-body .row {
+    margin-bottom: 0;
+ }
+ 
+ .table-body .col {
+    padding-top: 1.3rem !important;
+    padding-bottom: 1.3rem !important;
+ }
+ 
+ .calendar-table {
+    text-align: center;
+ }
+ 
+

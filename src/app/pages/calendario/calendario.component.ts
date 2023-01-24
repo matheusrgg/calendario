@@ -54,35 +54,38 @@ export class CalendarioComponent implements OnInit{
 
     for (let i = 0; i < 2 ; i++) {
       let emptyDivCol = this.renderer.createElement('div');
+      this.renderer.addClass(emptyDivCol, 'empty-day')
       this.renderer.addClass(emptyDivCol, 'col')
       this.renderer.appendChild(newTr, emptyDivCol )
      }
 
-     
-     console.log("pq nao pega o new TR length",newTr.childNodes.length);
-    //  console.log("pq nao pega o new TR length",newTr.childNodes.length);
-    //  console.log("pq nao pega o new TR length",this.divHello.nativeElement.length);
      for(let i = 1; i < 31; i++){
-      // console.log("deixaaaa eu tenta aqui", this.divHello.nativeElement.lastChild.childNodes.length);
+
       if( this.divHello.nativeElement.lastChild.childNodes.length >= 7){
         // debugger
-        console.log("como que nao caiu?",);
         this.renderer.appendChild(this.divHello.nativeElement,  this.addNewRow() )
       }
-      console.log("pq nao pega o new TR length", this.divHello.nativeElement.childNodes.length);
-      // console.log("pq nao pega o new TR length DENTRO",newTr.childNodes.length);
+
       let currentDay = this.renderer.createElement('div');
+      // this.renderer.addClass(currentDay, 'day');
       this.renderer.addClass(currentDay, 'col');
       this.renderer.setProperty(currentDay,'innerHTML', i);
       this.renderer.appendChild( this.divHello.nativeElement.lastChild, currentDay );
  
      }
+
+     for (let i = this.divHello.nativeElement.lastChild.childNodes.length; i < 7; i++) {
+      let emptyDivCol = this.renderer.createElement('div');
+      this.renderer.addClass(emptyDivCol, 'empty-day')
+      this.renderer.addClass(emptyDivCol, 'col')
+      this.renderer.appendChild(this.divHello.nativeElement.lastChild, emptyDivCol )
+   }
+
   }
 
   addNewRow(){
     let node = this.renderer.createElement('div');
     this.renderer.addClass(node, 'row')
-    this.renderer.setProperty(node,'innerHTML',"Tem que ter 4 dessas")
     return node
   }
  
