@@ -67,9 +67,12 @@ export class CalendarioComponent implements OnInit{
       }
 
       let currentDay = this.renderer.createElement('div');
-      // this.renderer.addClass(currentDay, 'day');
+      this.renderer.addClass(currentDay, 'day-novo');
       this.renderer.addClass(currentDay, 'col');
       this.renderer.setProperty(currentDay,'innerHTML', i);
+      let node = this.renderer.createElement('button');
+      this.renderer.appendChild(currentDay, node )
+      this.renderer.setProperty(currentDay,'click', console.log("cliquei"));
       this.renderer.appendChild( this.divHello.nativeElement.lastChild, currentDay );
  
      }
