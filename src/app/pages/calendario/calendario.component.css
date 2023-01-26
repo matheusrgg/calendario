@@ -92,6 +92,12 @@ h3,h4,h5 {
   background-color: #cac43b;
 }
 
+.button{
+  /* height: 20px; */
+    /* padding: 10; */
+    margin-bottom: 10px;
+}
+
  
 @media (max-width:767px) {
   .day-novo{

@@ -70,9 +70,17 @@ export class CalendarioComponent implements OnInit{
       this.renderer.addClass(currentDay, 'day-novo');
       this.renderer.addClass(currentDay, 'col');
       this.renderer.setProperty(currentDay,'innerHTML', i);
-      let node = this.renderer.createElement('button');
-      this.renderer.appendChild(currentDay, node )
-      this.renderer.setProperty(currentDay,'click', console.log("cliquei"));
+      let button = this.renderer.createElement('button');
+      this.renderer.setProperty(button,'innerHTML', 'Reservar');
+      this.renderer.addClass(button, 'button');
+      this.renderer.appendChild(currentDay, button )
+      this.renderer.listen(button, "click", ()=>{
+        this.openModal()
+      })
+
+
+
+
       this.renderer.appendChild( this.divHello.nativeElement.lastChild, currentDay );
  
      }
