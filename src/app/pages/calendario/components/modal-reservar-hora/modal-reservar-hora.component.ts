@@ -66,7 +66,9 @@ export class ModalReservarHoraComponent {
     console.log("array cheia", this.horariosReservadoHojeArr);
     this.checaSeTemOValorIgual()
     this.route.url.forEach(element => {
+      console.log("o que ta puando da url?", element);
       this.diaReserva = element[1].path
+      console.log("this.diaReserva",this.diaReserva);
     });
 
 

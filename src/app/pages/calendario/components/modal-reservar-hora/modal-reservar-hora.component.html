@@ -1,43 +1,37 @@
 <div id="newEventModal">
-
-  <h2>Reserva para o dia: {{diaReserva | date: 'dd/MM/yyyy'}}</h2>
-
-
-  <!-- [disabled]="horarioReservado" -->
-
+  <h2>Reserva para o dia: {{diaReserva}}</h2>
   <form [formGroup]="form">
     <h5>Horários</h5>
 
-      <div >
-        <input type="radio" class="form-check-input" name="seisManha" id="option1" value="06:00-7:00"
-          formControlName="seisManha">
-        <label class="form-check-label" for="option1">06:00 - 07:00</label>
-      </div>
-      <div >
-        <input type="radio" class="form-check-input" name="seteManha" id="option1" value="07:00-08:00"
-          formControlName="seteManha">
-        <label class="form-check-label" for="option1">07:00 - 08:00</label>
-      </div>
-      <div >
-        <input type="radio" class="form-check-input" name="oitoManha" id="option1" value="08:00-09:00"
-          formControlName="oitoManha">
-        <label class="form-check-label" for="option1">08:00 - 09:00</label>
-      </div>
-      <div >
-        <input type="radio" class="form-check-input" name="seisNoite" id="option1" value="18:00-19:00"
-          formControlName="seisNoite">
-        <label class="form-check-label" for="option1">18:00 - 19:00</label>
-      </div>
-      <div >
-        <input type="radio" class="form-check-input" name="seteNoite" id="option1" value="19:00-20:00"
-          formControlName="seteNoite">
-        <label class="form-check-label" for="option1">19:00 - 20:00</label>
-      </div>
+    <div>
+      <input type="radio" class="form-check-input" name="seisManha" id="option1" value="06:00-7:00"
+        formControlName="seisManha">
+      <label class="form-check-label" for="option1">06:00 - 07:00</label>
+    </div>
+    <div>
+      <input type="radio" class="form-check-input" name="seteManha" id="option1" value="07:00-08:00"
+        formControlName="seteManha">
+      <label class="form-check-label" for="option1">07:00 - 08:00</label>
+    </div>
+    <div>
+      <input type="radio" class="form-check-input" name="oitoManha" id="option1" value="08:00-09:00"
+        formControlName="oitoManha">
+      <label class="form-check-label" for="option1">08:00 - 09:00</label>
+    </div>
+    <div>
+      <input type="radio" class="form-check-input" name="seisNoite" id="option1" value="18:00-19:00"
+        formControlName="seisNoite">
+      <label class="form-check-label" for="option1">18:00 - 19:00</label>
+    </div>
+    <div>
+      <input type="radio" class="form-check-input" name="seteNoite" id="option1" value="19:00-20:00"
+        formControlName="seteNoite">
+      <label class="form-check-label" for="option1">19:00 - 20:00</label>
+    </div>
 
 
 
   </form>
-
   <div style="display: flex;
     justify-content: space-evenly;
     margin-top: 40px;
@@ -46,14 +40,5 @@
     <button (click)="saveTime()" id="reserva" class="btn btn-sm btn-secondary fw-bold border-white">Reservar</button>
     <!-- [disabled]="!form.valid" -->
   </div>
-
-
-
-
-
 </div>
-
-
-
-
 <div id="modalBackDrop"></div>
