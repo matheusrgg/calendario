@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, Renderer2,RendererFactory2, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { ReservasService } from 'src/app/services/reservas.service';
 
 @Component({
@@ -34,71 +35,21 @@ export class CalendarioComponent implements OnInit{
   constructor(
     private reservasService : ReservasService,
     private renderer: Renderer2,
-    private rendererFactory :RendererFactory2
+    private rendererFactory :RendererFactory2,
+    private router: Router
     ){}
     
   newMonth = new Date();
 
   ngOnInit() {
-    this.configDatas()
   }
-
-  ngAfterViewInit() {
   
-
-    this.renderer.setProperty(this.divHello.nativeElement,'innerHTML',"")
-    const newTr = this.renderer.createElement('div');
-    this.renderer.addClass(newTr, 'row')
-
-    this.renderer.appendChild(this.divHello.nativeElement, newTr)
-
-    for (let i = 0; i < 2 ; i++) {
-      let emptyDivCol = this.renderer.createElement('div');
-      this.renderer.addClass(emptyDivCol, 'empty-day')
-      this.renderer.addClass(emptyDivCol, 'col')
-      this.renderer.appendChild(newTr, emptyDivCol )
-     }
-
-     for(let i = 1; i < 31; i++){
-
-      if( this.divHello.nativeElement.lastChild.childNodes.length >= 7){
-        // debugger
-        this.renderer.appendChild(this.divHello.nativeElement,  this.addNewRow() )
-      }
-
-      let currentDay = this.renderer.createElement('div');
-      this.renderer.addClass(currentDay, 'day-novo');
-      this.renderer.addClass(currentDay, 'col');
-      this.renderer.setProperty(currentDay,'innerHTML', i);
-      let button = this.renderer.createElement('button');
-      this.renderer.setProperty(button,'innerHTML', 'Reservar');
-      this.renderer.addClass(button, 'button');
-      this.renderer.appendChild(currentDay, button )
-      this.renderer.listen(button, "click", ()=>{
-        this.openModal()
-      })
-
-
-
-
-      this.renderer.appendChild( this.divHello.nativeElement.lastChild, currentDay );
- 
-     }
-
-     for (let i = this.divHello.nativeElement.lastChild.childNodes.length; i < 7; i++) {
-      let emptyDivCol = this.renderer.createElement('div');
-      this.renderer.addClass(emptyDivCol, 'empty-day')
-      this.renderer.addClass(emptyDivCol, 'col')
-      this.renderer.appendChild(this.divHello.nativeElement.lastChild, emptyDivCol )
-   }
-
+  ngAfterViewInit() {
+    
+    this.configDatas()
+   
   }
 
-  addNewRow(){
-    let node = this.renderer.createElement('div');
-    this.renderer.addClass(node, 'row')
-    return node
-  }
  
   backMonth() {
     console.log("funciona pra tras", this.nav);
@@ -142,6 +93,8 @@ export class CalendarioComponent implements OnInit{
     this.dateDisplay = `${dt.toLocaleDateString('pt-br', { month: 'long' })} ${year}`;
     const  paddingDays = this.weekdays.indexOf(dateString.split(', ')[0])
     this.preencherCalendario(paddingDays, daysInMonth , month, year)
+    this.novoCalendario(daysInMonth,paddingDays)
+
   }
   
   preencherCalendario(paddingDays:any, daysInMonth:any , month:any, year:any){
@@ -192,5 +145,84 @@ export class CalendarioComponent implements OnInit{
 
     }
   }
+
+  
+  addNewRow(){
+    let node = this.renderer.createElement('div');
+    this.renderer.addClass(node, 'row')
+    return node
+  }
+
+
+  novoCalendario( daysInMonth , paddingDays){
+    
+    this.renderer.setProperty(this.divHello.nativeElement,'innerHTML',"")
+    const newTr = this.renderer.createElement('div');
+    this.renderer.addClass(newTr, 'row')
+
+    this.renderer.appendChild(this.divHello.nativeElement, newTr)
+
+
+    //padding days
+    for (let i = 0; i < paddingDays ; i++) {
+      let emptyDivCol = this.renderer.createElement('div');
+      this.renderer.addClass(emptyDivCol, 'empty-day')
+      this.renderer.addClass(emptyDivCol, 'col')
+      this.renderer.appendChild(newTr, emptyDivCol )
+     }
+
+     //preciso do daysInMonth aqui
+     for(let i = 1; i < daysInMonth; i++){
+
+      if( this.divHello.nativeElement.lastChild.childNodes.length >= 7){
+        // debugger
+        this.renderer.appendChild(this.divHello.nativeElement,  this.addNewRow() )
+      }
+
+      let currentDay = this.renderer.createElement('div');
+      this.renderer.addClass(currentDay, 'day-novo');
+      this.renderer.addClass(currentDay, 'col');
+      this.renderer.setProperty(currentDay,'innerHTML', i);
+      let button = this.renderer.createElement('button');
+      this.renderer.setProperty(button,'innerHTML', 'Reservar');
+      this.renderer.addClass(button, 'button');
+      this.renderer.appendChild(currentDay, button )
+      this.renderer.listen(button, "click", ()=>{
+        this.router.navigate(['/calendario', '31'])
+        this.openModal()
+      })
+      this.renderer.listen(currentDay, "click", ()=>{
+        this.router.navigate(['/calendario', '31'])
+        this.openModal()
+      })
+
+
+
+
+      this.renderer.appendChild( this.divHello.nativeElement.lastChild, currentDay );
+ 
+     }
+
+     for (let i = this.divHello.nativeElement.lastChild.childNodes.length; i < 7; i++) {
+      let emptyDivCol = this.renderer.createElement('div');
+      this.renderer.addClass(emptyDivCol, 'empty-day')
+      this.renderer.addClass(emptyDivCol, 'col')
+      this.renderer.appendChild(this.divHello.nativeElement.lastChild, emptyDivCol )
+   }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 }
