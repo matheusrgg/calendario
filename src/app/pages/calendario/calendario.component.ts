@@ -2,6 +2,8 @@ import { Component, ElementRef, OnInit, Renderer2, RendererFactory2, ViewChild }
 import { Router } from '@angular/router';
 import { ReservasService } from 'src/app/services/reservas.service';
 
+import * as XLSX from 'xlsx'
+
 @Component({
   selector: 'app-calendario',
   templateUrl: './calendario.component.html',
@@ -52,14 +54,12 @@ export class CalendarioComponent implements OnInit {
 
 
   backMonth() {
-    console.log("funciona pra tras", this.nav);
     this.nav--
     this.daysArr = []
     this.configDatas()
   }
 
   nextMonth() {
-    console.log("funciona pra tras", this.nav);
     this.nav++
     this.daysArr = []
     this.configDatas()
@@ -78,10 +78,8 @@ export class CalendarioComponent implements OnInit {
     const month = dt.getMonth();
     const year = dt.getFullYear();
 
-
     const firstDayOfMonth = new Date(year, month, 1);
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-    console.log("days int the month igual a last Day neh?", daysInMonth);
 
     const dateString = firstDayOfMonth.toLocaleDateString('pt-br', {
       weekday: 'long',
@@ -89,7 +87,7 @@ export class CalendarioComponent implements OnInit {
       month: 'numeric',
       day: 'numeric',
     });
-    console.log("object", dateString);
+
     this.dateDisplay = `${dt.toLocaleDateString('pt-br', { month: 'long' })} ${year}`;
     const paddingDays = this.weekdays.indexOf(dateString.split(', ')[0])
     this.preencherCalendario(paddingDays, daysInMonth, month, year)
@@ -98,12 +96,10 @@ export class CalendarioComponent implements OnInit {
   }
 
   preencherCalendario(paddingDays: any, daysInMonth: any, month: any, year: any) {
-    console.log(paddingDays, daysInMonth, month, year);
 
     for (let i = 1; i <= paddingDays + daysInMonth; i++) {
       const dayString = `${month + 1}/${i - paddingDays}/${year}`;
 
-      console.log("oq tem dentro desse dayString?", month + 1);
       if (i > paddingDays) {
         this.daysArr.push({
           value: i - paddingDays,
@@ -126,12 +122,10 @@ export class CalendarioComponent implements OnInit {
   }
 
   openModal() {
-    console.log("modal aberto");
     this.showModal = true;
   }
 
   onFecharModal(evento: any) {
-    console.log("falseeeeeeeeeeeee", evento);
     this.showModal = evento;
   }
 
@@ -154,7 +148,7 @@ export class CalendarioComponent implements OnInit {
   }
 
 
-  novoCalendario(daysInMonth:any , paddingDays:any, month: any, year: any) {
+  novoCalendario(daysInMonth: any, paddingDays: any, month: any, year: any) {
 
     this.renderer.setProperty(this.divHello.nativeElement, 'innerHTML', "")
     const newTr = this.renderer.createElement('div');
@@ -205,16 +199,88 @@ export class CalendarioComponent implements OnInit {
 
 
 
+  reservas = [
+    {
+      "quadra": "rápida",
+      "nome": "Joao Antonio",
+      "Dia": "17/12/2022",
+      "Hora": "06:00-7:00",
+      "pagamento": "nao concluido",
+      "status": "reservado"
+    },
+    {
+      "quadra": "rápida",
+      "nome": "Beatriz Oliveira",
+      "Dia": "15/12/2022",
+      "Hora": "18:00-19:00",
+      "pagamento": "nao concluido",
+      "status": "reservado"
+    },
+    {
+      "quadra": "rápida",
+      "nome": "Caio de Sousa",
+      "Dia": "22/12/2022",
+      "Hora": "19:00-20:00",
+      "pagamento": "nao concluido",
+      "status": "reservado"
+    },
 
 
+  ]
 
+  downloadExcel(){
+    this.exportToXlsx(this.reservas)
+  }
 
+  exportToXlsx(data: any) {
+    console.log("baixar excel");
+    const doc = data.map((item: any) => this.dataItemToExcelLine(item));
+    const title = 'TitleTeste';
+    const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    const worksheet = XLSX.utils.json_to_sheet(doc);
+  
 
+    worksheet['!cols'] = this.fitToColumn(doc);
 
+    //esse nome workbook tb vi no video
+    const workbook = {
+      Sheets: {
+        [title]: worksheet,
+      },
+      SheetNames: [title.substring(0, 31)], //Nome das planilhas podem ter no máximo 32 caracteres
+    }
 
+    const excelBuffer = XLSX.write(workbook, {bookType: 'xlsx', type: 'array'});
+    const blobData = new Blob([excelBuffer], {type: EXCEL_TYPE});
+    //vou precisar baixar o renderer 2 e já usei no form 
+    const linkRef = this.renderer.createElement('a') as HTMLAnchorElement
+    const url = window.URL.createObjectURL(blobData);
+    this.renderer.setAttribute(linkRef , 'href', url)
+    this.renderer.setAttribute(linkRef , 'download', `${title}`)
+    linkRef.click()
 
+  }
 
+  dataItemToExcelLine = (item: any) => {
+    let line: any = {}
+    for (let colKey in item) {
+      const colName = colKey
+      line[colName] = item[colKey]
+    }
+    return line
+  }
 
-
+  private fitToColumn = (data:any) => {
+    const columnWidths = [];
+    for (const property in data[0]) {
+      columnWidths.push({
+        wch: Math.max(
+          property ? property.toString().length : 0,
+          ...data.map((obj: any) => (obj[property] ? obj[property].toString().length : 0))
+        )
+      })
+    }
+    return columnWidths
+  }
 
 }
