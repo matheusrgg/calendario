@@ -10,6 +10,8 @@ import { ModalReservarHoraComponent } from './pages/calendario/components/modal-
 import { HeaderComponent } from './pages/calendario/components/header/header.component';
 import { AuthService } from './pages/login/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdministrativoComponent } from './pages/administrativo/listAulas/administrativo.component';
+import { AdministrativoSlotsComponent } from './pages/administrativo/listSlots/administrativoSlots.component';
 
 
 @NgModule({
@@ -20,6 +22,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     ModalReservarHoraComponent,
     HeaderComponent,
+    AdministrativoComponent,
+    AdministrativoSlotsComponent
+    
  
   ],
   imports: [

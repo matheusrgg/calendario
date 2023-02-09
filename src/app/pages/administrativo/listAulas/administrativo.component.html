@@ -1,0 +1,30 @@
+<div class="container" style="margin-top: 70px;">
+    <h1>Tabela de Aulas</h1>
+    <div style="margin-top: 45px; display: flex; justify-content: space-between;">
+        <button class="btn btn-primary btn-sm m-2" (click)="criarAula()">Criar Aulas</button>
+        <button class="btn btn-sm m-2" style="background-color: green;"> Baixar Planilhas</button>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Professor</th>
+                <th scope="col">Horario</th>
+                <th scope="col">Quadra</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let aula of arrAulas">
+                <th scope="row">{{aula.id}}</th>
+                <td>{{aula.id}}</td>
+                <td>{{aula.name}}</td>
+                <td>{{aula.description}}</td>
+                <td>
+                    <button class="btn btn-info btn-sm m-2" (click)="editarAula()">Editar</button>
+                    <button class="btn btn-secondary btn-sm m-2" (click)="maisInfo()">Horarios</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
