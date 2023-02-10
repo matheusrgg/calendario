@@ -10,8 +10,10 @@ import { ModalReservarHoraComponent } from './pages/calendario/components/modal-
 import { HeaderComponent } from './pages/calendario/components/header/header.component';
 import { AuthService } from './pages/login/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AdministrativoComponent } from './pages/administrativo/listAulas/administrativo.component';
-import { AdministrativoSlotsComponent } from './pages/administrativo/listSlots/administrativoSlots.component';
+import { AdministrativoComponent } from './pages/administrativo/list/listAulas/administrativo.component';
+import { AdministrativoSlotsComponent } from './pages/administrativo/list/listSlots/administrativoSlots.component';
+import { AdministrativoEditComponent } from './pages/administrativo/edit/editAulas/administrativoEdit.component';
+import { AdministrativoEditSlotsComponent } from './pages/administrativo/edit/editSlot/administrativoEditSlots.component';
 
 
 @NgModule({
@@ -23,13 +25,14 @@ import { AdministrativoSlotsComponent } from './pages/administrativo/listSlots/a
     ModalReservarHoraComponent,
     HeaderComponent,
     AdministrativoComponent,
-    AdministrativoSlotsComponent
+    AdministrativoSlotsComponent,
+    AdministrativoEditComponent,
+    AdministrativoEditSlotsComponent
     
  
   ],
   imports: [
     BrowserModule,
-    // AppRoutingModule
     FormsModule,
     routing
     ,ReactiveFormsModule

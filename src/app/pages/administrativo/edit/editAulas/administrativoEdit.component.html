@@ -1,0 +1,19 @@
+<div class="container" style="margin-top: 70px;">
+    <h1>Criar Aula</h1>
+    <button (click)="voltar()">Voltar</button>
+
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <h4>Aulas</h4>
+        <div class="form-group">
+            <label for="exampleInputEmail">Nome da Aula</label>
+            <input type="text" formControlNmae="first" class="form-control" placeholder="Escreva o nome">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail">Descrição da Aula</label>
+            <input type="text" formControlNmae="descricao" class="form-control" placeholder="Escreva o nome">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+</div>

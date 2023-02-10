@@ -35,7 +35,7 @@ export class AdministrativoSlotsComponent implements OnInit {
   }
 
   criarSlots(){
-    // this.router.navigate("[/administrativoSlots]")
+    this.router.navigate(["/administrativoEditSlots"])
 
   }
 

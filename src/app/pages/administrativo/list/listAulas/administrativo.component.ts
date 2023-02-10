@@ -25,11 +25,11 @@ export class AdministrativoComponent implements OnInit {
 
 
   maisInfo(){
-    // this.router.navigate(["/administrativoMaisInfo"])
+    this.router.navigate(["/administrativoSlots"])
   }
 
   criarAula(){
-    this.router.navigate(["/administrativoMaisInfo"])
+    this.router.navigate(["/administrativoEdit"])
   }
 
   editarAula(){
